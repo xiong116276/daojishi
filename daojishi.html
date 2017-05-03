@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>倒计时</title>
+</head>
+<body>
+    <p id="time">
+        <span>{{hour}}</span>:<span>{{minute}}</span>:<span>{{second}}</span>
+    </p>
+    <script src="js/vue.js"></script>
+    <script>
+            var vm = new Vue({
+                el:"#time",
+                data:{
+                    hour: '00',
+                    minute: 59-new Date().getMinutes(),
+                    second: 60-new Date().getSeconds()
+                },
+                methods:{
+                    active:function () {
+                        if((this.hour > 0) && (this.minute == 0) && (this.second == 0)){
+                            if(this.hour <= 10){
+                                if(this.hour > 0){
+                                    this.hour--;
+                                    this.hour = '0'+this.hour;
+                                }
+                                this.minute = 60;
+                            }else {
+                                if(this.hour > 0){
+                                    this.hour--;
+                                }
+                                this.minute = 60;
+                            }
+                        }
+                        if((this.minute > 0) && (this.second ==0)){
+                            if(this.minute <= 10){
+                                this.minute--;
+                                this.minute = '0'+this.minute;
+                                this.second = 60;
+                            }else {
+                                this.minute--;
+                                this.second = 60;
+                            }
+                        }
+                        if(this.second > 0){
+                            if(this.second <= 10){
+                                this.second--;
+                                this.second = '0'+this.second;
+                            }else {
+                                this.second--;
+                            }
+                        }
+                        if(this.second ==0 && this.minute == 0 && this.hour == 0){
+                            this.hour = '01';
+                        }
+                    },
+                    init:function () {
+                        var active = this.$options.methods.active.bind(this);
+                        var timer = setInterval(active,1000);
+                    }
+                }
+            });
+            vm.init();
+    </script>
+</body>
+</html>
