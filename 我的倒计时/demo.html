@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>倒计时</title>
+	<style>
+		.seckill-time {
+			width: 180px;
+			margin: 20px auto 0;
+			text-align: center; }
+		.seckill-time .time-item {
+			display: inline-block;
+			position: relative;
+			float: left;
+			width: 40px;
+			height: 40px;
+			line-height: 40px;
+			text-align: center;
+			background-color: #2f3430;
+			margin-right: 5px;
+			font-weight: bold;
+			font-size: 20px;
+			color: #fff;
+		}
+		.seckill-time .time-item:last-child {
+			margin-right: 0; }
+		.seckill-time .time-item:after {
+			content: '';
+			display: block;
+			position: absolute;
+			left: 0;
+			width: 100%;
+			top: 50%;
+			height: 1px;
+			background: #e83632; }
+	</style>
+</head>
+<body>
+<div class="seckill-time clearfix">
+	<span class="time-item t-d">00</span>
+	<span class="time-item t-h">00</span>
+	<span class="time-item t-m">00</span>
+	<span class="time-item t-s">00</span>
+</div>
+<script src="js/jquery-3.1.1.js"></script>
+<script src="js/myCountDown.js"></script>
+<script>
+	var countDown = new MyCountDown({
+		time: '2018-10-18 18:00:00',
+		day:    '.seckill-time .t-d',
+		hours:  '.seckill-time .t-h',
+		minutes:'.seckill-time .t-m',
+		seconds:'.seckill-time .t-s',
+	});
+</script>
+</body>
+</html>
