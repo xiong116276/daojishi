@@ -7,12 +7,16 @@
     this.m = obj.minutes;
     this.s = obj.seconds;
 
-    if(typeof(this.time) == "number"){
-      this.time_end = this.time;
-    }else if(typeof(this.time)=="string"){
-      this.time_end = this.myDate(this.time).getTime();
+    if(navigator.userAgent.indexOf("compatible") > -1 && navigator.userAgent.indexOf("MSIE") > -1){
+      //IE 不支持new Date() 带参数调用；
+      if(typeof(this.time) == "number"){
+        this.time_end = this.time;
+      }else if(typeof(this.time)=="string"){
+        this.time_end = this.myDate(this.time).getTime();
+      }
+    }else{
+      this.time_end = parseInt(new Date(this.time).getTime());
     }
-
     this.time_n = parseInt(new Date().getTime());
     this.count = this.time_end - this.time_n;
     this.init();
